@@ -24,12 +24,10 @@ def retrieve_count(query_raw: str):
         res_int = 0
     else:
         content = str(soup.find('div',{'id':'result-stats'}))
-        if content is None:
+        print(str(content))
+        if str(content) == 'None':
             res_int = 0
         else:
-            print(type(content))
-            print(content)
-            #TODO fix bug with string None
             res = re.search(r'([0-9,]*) result', content)
             res_int = int(res.group(1).strip().replace(',', ''))
     return res_int
