@@ -1,10 +1,10 @@
-import requests
-from bs4 import BeautifulSoup
-from googlesearch import search # this is the package 'google'
-from size_comparisons.exploration.explore_infoboxes import generate_query
+import logging
 import re
 import time
-import logging
+
+import requests
+from bs4 import BeautifulSoup
+from size_comparisons.exploration.explore_infoboxes import generate_query
 
 logger = logging.getLogger(__name__)
 
@@ -24,12 +24,11 @@ def retrieve_count(query_raw: str):
         res_int = 0
     else:
         content = str(soup.find('div',{'id':'result-stats'}))
-        print(str(content))
         if str(content) == 'None':
             res_int = 0
         else:
-            res = re.search(r'([0-9,]*) result', content)
-            res_int = int(res.group(1).strip().replace(',', ''))
+            res = re.search(r'([0-9,.]*) result', content)
+            res_int = int(res.group(1).strip().replace(',', '').replace('.',''))
     return res_int
 
 
@@ -41,9 +40,8 @@ def check_abstract(entity: str):
     time.sleep(2)
     count_an = retrieve_count(f'"say that an {entity} is"')
 
-    abstract =  count_nothing > 10 * count_a and count_nothing > count_an
-    return abstract
-
+    abstract = count_nothing > 10 * count_a and count_nothing > count_an
+    return 1 if abstract else 0
 
 
 if __name__ == "__main__":
