@@ -47,8 +47,8 @@ def check_abstract(entity: str):
 
 
 if __name__ == "__main__":
-    # print(check_abstract('love'))
-    # print(check_abstract('lemon'))
-    # print(check_abstract('freedom'))
-    # print(check_abstract('apple'))
+    print(check_abstract('love'))
+    print(check_abstract('lemon'))
+    print(check_abstract('freedom'))
+    print(check_abstract('apple'))
     print(check_abstract('sksdkldfnldfnklnldsssssssssssssssssssdfsdfsdfsdfsdffsdfhsdlidslindsilnlinlislslsl'))
