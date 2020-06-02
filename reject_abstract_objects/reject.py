@@ -19,6 +19,8 @@ def retrieve_count(query_raw: str):
 
     # Based on https://stackoverflow.com/a/29379918
     r = requests.get(query, allow_redirects=True, headers= HEADERS)
+    if r.status_code != 200:
+        raise Exception(f'Query {query} gave code {r.status_code}')
 
     soup = BeautifulSoup(r.text, 'lxml')
     text = soup.get_text()
@@ -35,11 +37,11 @@ def retrieve_count(query_raw: str):
 
 
 def check_abstract(entity: str):
-    time.sleep(2)
+    time.sleep(3)
     count_nothing = retrieve_count(f'"say that {entity} is"')
-    time.sleep(2)
+    time.sleep(3)
     count_a = retrieve_count(f'"say that a {entity} is"')
-    time.sleep(2)
+    time.sleep(3)
     count_an = retrieve_count(f'"say that an {entity} is"')
 
     abstract = count_nothing > 2 * count_a and count_nothing > count_an

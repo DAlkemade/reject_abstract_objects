@@ -28,7 +28,7 @@ def main():
     logger.info(f'Recall: {recall}')
 
     errors = []
-    for i, object in list(input['object']):
+    for i, object in enumerate(list(input['object'])):
         pred = y_pred[i]
         gold = y_true[i]
         if pred != gold:
