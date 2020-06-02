@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    input = pd.read_csv('dev.csv')
+    input = pd.read_csv('test_annotated.csv')
+    input = input[input['abstract'] != -1]
     y_true = list(input['abstract'])
     y_pred = list()
     for entity in tqdm.tqdm(list(input['object'])):

@@ -13,6 +13,8 @@ HEADERS = {
 }
 
 def retrieve_count(query_raw: str):
+    #TODO exclude anything with capital letter
+    #TODO remove s if last letter
     query = generate_query(query_raw)
 
     # Based on https://stackoverflow.com/a/29379918
@@ -40,11 +42,12 @@ def check_abstract(entity: str):
     time.sleep(2)
     count_an = retrieve_count(f'"say that an {entity} is"')
 
-    abstract = count_nothing > 10 * count_a and count_nothing > count_an
+    abstract = count_nothing > 2 * count_a and count_nothing > count_an
     return 1 if abstract else 0
 
 
 if __name__ == "__main__":
+    print(check_abstract('racketeering'))
     print(check_abstract('love'))
     print(check_abstract('lemon'))
     print(check_abstract('freedom'))
