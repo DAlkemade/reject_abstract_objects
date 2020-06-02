@@ -27,6 +27,15 @@ def main():
     logger.info(f'Precision: {precision}')
     logger.info(f'Recall: {recall}')
 
+    errors = []
+    for i, object in list(input['object']):
+        pred = y_pred[i]
+        gold = y_true[i]
+        if pred != gold:
+            errors.append(object)
+    logger.info(f'Number of mistakes: {len(errors)}')
+    logger.info(f'Mistakes: {errors}')
+
 
 if __name__ == "__main__":
     try:
