@@ -12,6 +12,8 @@ HEADERS = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0'
 }
 
+TIME_OUT = 10
+
 def retrieve_count(query_raw: str):
     #TODO exclude anything with capital letter
     #TODO remove s if last letter
@@ -37,11 +39,11 @@ def retrieve_count(query_raw: str):
 
 
 def check_abstract(entity: str):
-    time.sleep(3)
+    time.sleep(TIME_OUT)
     count_nothing = retrieve_count(f'"say that {entity} is"')
-    time.sleep(3)
+    time.sleep(TIME_OUT)
     count_a = retrieve_count(f'"say that a {entity} is"')
-    time.sleep(3)
+    time.sleep(TIME_OUT)
     count_an = retrieve_count(f'"say that an {entity} is"')
 
     abstract = count_nothing > 2 * count_a and count_nothing > count_an
