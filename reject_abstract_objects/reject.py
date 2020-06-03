@@ -12,7 +12,7 @@ HEADERS = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0'
 }
 
-TIME_OUT = 10
+TIME_OUT = 45
 
 def retrieve_count(query_raw: str):
     #TODO exclude anything with capital letter
