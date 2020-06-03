@@ -27,14 +27,18 @@ def main():
     logger.info(f'Precision: {precision}')
     logger.info(f'Recall: {recall}')
 
-    errors = []
+    false_negatives = []
+    false_positives = []
     for i, object in enumerate(list(input['object'])):
         pred = y_pred[i]
         gold = y_true[i]
-        if pred != gold:
-            errors.append(object)
-    logger.info(f'Number of mistakes: {len(errors)}')
-    logger.info(f'Mistakes: {errors}')
+        if pred is True and gold is False:
+            false_positives.append(object)
+        if pred is False and gold is True:
+            false_negatives.append(object)
+    logger.info(f'Number of mistakes: {len(false_negatives) + len(false_positives)}')
+    logger.info(f'False positives: {false_positives}')
+    logger.info(f'False negatives: {false_negatives}')
 
 
 if __name__ == "__main__":
