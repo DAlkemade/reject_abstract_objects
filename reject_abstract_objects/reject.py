@@ -45,11 +45,12 @@ def check_abstract(entity: str):
     count_a = retrieve_count(f'"say that a {entity} is"')
     time.sleep(TIME_OUT)
     count_an = retrieve_count(f'"say that an {entity} is"')
-    if count_nothing == count_a == count_an == 0:
-        logger.info(f'No results at all for {entity}')
 
+    no_results = count_nothing == count_a == count_an == 0
+    if no_results:
+        logger.info(f'No results at all for {entity}')
     abstract = count_nothing > 2 * count_a and count_nothing > count_an
-    return 1 if abstract else 0
+    return 1 if abstract else 0, no_results
 
 
 if __name__ == "__main__":
