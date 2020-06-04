@@ -12,6 +12,7 @@ set_up_root_logger(f'reject', os.path.join(os.getcwd(), 'logs'))
 
 logger = logging.getLogger(__name__)
 
+THE = True
 
 def main():
     input = pd.read_csv('test_annotated.csv')
@@ -20,7 +21,7 @@ def main():
     y_pred = list()
     no_results = set()
     for entity in tqdm.tqdm(list(input['object'])):
-        res, no_result = check_abstract(entity)
+        res, no_result = check_abstract(entity, the=THE)
         y_pred.append(res)
         if no_result:
             no_results.add(entity)
@@ -49,7 +50,7 @@ def main():
 
 
 def errror_analysis(errors: set, no_results: set):
-    logger.info(f'False positives (n={len(errors)}): {errors}')
+    logger.info(f'Errors (n={len(errors)}): {errors}')
     errors_no_results = errors.intersection(no_results)
     logger.info(f'Intersection errors and no_results (n={len(errors_no_results)}): {errors_no_results}')
     errors_with_results = errors - no_results

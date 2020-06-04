@@ -38,18 +38,23 @@ def retrieve_count(query_raw: str):
     return res_int
 
 
-def check_abstract(entity: str):
+def check_abstract(entity: str, the: bool = False):
     time.sleep(TIME_OUT)
     count_nothing = retrieve_count(f'"say that {entity} is"')
     time.sleep(TIME_OUT)
     count_a = retrieve_count(f'"say that a {entity} is"')
     time.sleep(TIME_OUT)
     count_an = retrieve_count(f'"say that an {entity} is"')
+    if the:
+        time.sleep(TIME_OUT)
+        count_the = retrieve_count(f'"say that the {entity} is"')
+    else:
+        count_the = 0
 
-    no_results = count_nothing == count_a == count_an == 0
+    no_results = count_nothing == count_a == count_an == count_the == 0
     if no_results:
         logger.info(f'No results at all for {entity}')
-    abstract = count_nothing > 2 * count_a and count_nothing > count_an
+    abstract = count_nothing > 2 * count_a and count_nothing > 2 * count_an and count_nothing > 2 * count_the
     return 1 if abstract else 0, no_results
 
 
