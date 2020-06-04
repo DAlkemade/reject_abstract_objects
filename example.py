@@ -32,9 +32,9 @@ def main():
     for i, object in enumerate(list(input['object'])):
         pred = y_pred[i]
         gold = y_true[i]
-        if pred is True and gold is False:
+        if pred == 1 and gold == 0:
             false_positives.append(object)
-        if pred is False and gold is True:
+        if pred == 0 and gold == 1:
             false_negatives.append(object)
     logger.info(f'Number of mistakes: {len(false_negatives) + len(false_positives)}')
     logger.info(f'False positives: {false_positives}')
