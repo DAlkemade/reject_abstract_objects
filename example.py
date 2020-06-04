@@ -12,7 +12,7 @@ set_up_root_logger(f'reject', os.path.join(os.getcwd(), 'logs'))
 
 logger = logging.getLogger(__name__)
 
-THE = True
+THE = False
 
 def main():
     input = pd.read_csv('test_annotated.csv')
