@@ -17,6 +17,9 @@ THE = True
 def main():
     input = pd.read_csv('test_annotated.csv')
     input = input[input['abstract'] != -1]
+
+    logger.info(f"Percentage abstract: {input['abstract'].mean()}")
+
     y_true = list(input['abstract'])
     y_pred = list()
     no_results = set()
