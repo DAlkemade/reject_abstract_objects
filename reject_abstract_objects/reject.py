@@ -9,19 +9,20 @@ from size_comparisons.exploration.explore_infoboxes import generate_query
 logger = logging.getLogger(__name__)
 
 HEADERS = {
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0'
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0'
 }
 
 TIME_OUT = 45
 
+
 def retrieve_count(query_raw: str):
     """Query google and parse the number of hits."""
-    #TODO exclude anything with capital letter
-    #TODO remove s if last letter
+    # TODO exclude anything with capital letter
+    # TODO remove s if last letter
     query = generate_query(query_raw)
 
     # Based on https://stackoverflow.com/a/29379918
-    r = requests.get(query, allow_redirects=True, headers= HEADERS)
+    r = requests.get(query, allow_redirects=True, headers=HEADERS)
     if r.status_code != 200:
         raise Exception(f'Query {query} gave code {r.status_code}')
 
@@ -30,12 +31,12 @@ def retrieve_count(query_raw: str):
     if 'No results found for' in text:
         res_int = 0
     else:
-        content = str(soup.find('div',{'id':'result-stats'}))
+        content = str(soup.find('div', {'id': 'result-stats'}))
         if str(content) == 'None':
             res_int = 0
         else:
             res = re.search(r'([0-9,.]*) result', content)
-            res_int = int(res.group(1).strip().replace(',', '').replace('.',''))
+            res_int = int(res.group(1).strip().replace(',', '').replace('.', ''))
     return res_int
 
 

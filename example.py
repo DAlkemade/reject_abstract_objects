@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 THE = True
 
+
 def main():
     """Run an example of the abstract word rejection system."""
     input = pd.read_csv('test_annotated.csv')
