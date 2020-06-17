@@ -15,6 +15,7 @@ HEADERS = {
 TIME_OUT = 45
 
 def retrieve_count(query_raw: str):
+    """Query google and parse the number of hits."""
     #TODO exclude anything with capital letter
     #TODO remove s if last letter
     query = generate_query(query_raw)
@@ -39,6 +40,7 @@ def retrieve_count(query_raw: str):
 
 
 def check_abstract(entity: str, the: bool = False):
+    """Check if an entity is abstract."""
     time.sleep(TIME_OUT)
     count_nothing = retrieve_count(f'"say that {entity} is"')
     time.sleep(TIME_OUT)

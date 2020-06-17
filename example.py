@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 THE = True
 
 def main():
+    """Run an example of the abstract word rejection system."""
     input = pd.read_csv('test_annotated.csv')
     input = input[input['abstract'] != -1]
 
@@ -53,6 +54,7 @@ def main():
 
 
 def errror_analysis(errors: set, no_results: set):
+    """Analyze errors."""
     logger.info(f'Errors (n={len(errors)}): {errors}')
     errors_no_results = errors.intersection(no_results)
     logger.info(f'Intersection errors and no_results (n={len(errors_no_results)}): {errors_no_results}')
